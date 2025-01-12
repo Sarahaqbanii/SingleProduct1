@@ -1,22 +1,74 @@
 {#
-| Variable      | Type   | Description                                                      |
-|---------------|--------|------------------------------------------------------------------|
-| items[]       | array  | List of 3 features                                               |
-| items[].icon  | string | SallaIcons css class `sicon-*`                                   |
-| items[].title | string | Title of the feature                                             |
-| items[].text  | string | Subtitle for the feature                                         |
-| position      | Int    | Sorting number start from zero                                   |
+| Variable          | Type    | Description                                                                 |
+|-------------------|---------|-----------------------------------------------------------------------------|
+| heading           | string  | Main heading of the section                                                |
+| items[]           | array   | List of feature items                                                      |
+| items[].image     | string  | Image URL for the feature                                                  |
+| items[].alt       | string  | Alt text for the image                                                     |
+| items[].title     | string  | Title of the feature                                                       |
+| items[].text      | string  | Description text for the feature                                           |
+| center_image      | string  | Image URL for the center section                                           |
+| center_image_alt  | string  | Alt text for the center image                                              |
 #}
+
 <section class="s-block s-block--features container">
-    <div class="grid grid-cols-[repeat(2,minmax(0,1fr))] md:grid-cols-[repeat(3,minmax(0,1fr))] gap-4 sm:gap-6 xl:gap-8">
-      {% for item in items %}
-          <div class="s-block--features__item">
-            <div class="feature-icon">
-              <i class="{{ item.icon }}"></i>
+<div class="container">
+  <div class="heading rte" style="text-align: center; margin-bottom: 40px;">
+    <h2>{{ heading }}</h2>
+  </div>
+  <div class="section-icon-boxs-m">
+    <div class="section-icon-boxs-m-left">
+      {% for item in items|slice(0, 3) %}
+        <div class="custom-item">
+          <div class="cust-inner">
+            <div class="icon-heading">
+              <div class="image-wrap adapt-media">
+                <div class="icon-images lazy-image">
+                  <img src="{{ item.image }}" alt="{{ item.alt }}" width="170" height="170" loading="lazy">
+                </div>
+              </div>
+              <div class="header-text" style="color:#000000;">
+                <h4>{{ item.title }}</h4>
+              </div>
             </div>
-            <h2>{{ item.title }}</h2>
-            <p>{{ item.text }}</p>
+            <div class="textblocks-m">
+              <div class="text" style="color:#000000;">
+                <p>{{ item.text }}</p>
+              </div>
+            </div>
           </div>
+        </div>
       {% endfor %}
     </div>
-</section>
+    <div class="section-icon-boxs-m-center">
+      <div class="image-wrap adapt-media">
+        <div class="icon-images lazy-image">
+          <img src="{{ center_image }}" alt="{{ center_image_alt }}" width="170" height="170" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="section-icon-boxs-m-right">
+      {% for item in items|slice(3, 3) %}
+        <div class="custom-item">
+          <div class="cust-inner">
+            <div class="icon-heading">
+              <div class="image-wrap adapt-media">
+                <div class="icon-images lazy-image">
+                  <img src="{{ item.image }}" alt="{{ item.alt }}" width="170" height="170" loading="lazy">
+                </div>
+              </div>
+              <div class="header-text" style="color:#000000;">
+                <h4>{{ item.title }}</h4>
+              </div>
+            </div>
+            <div class="textblocks-m">
+              <div class="text" style="color:#000000;">
+                <p>{{ item.text }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
